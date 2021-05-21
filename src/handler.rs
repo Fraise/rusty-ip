@@ -1,6 +1,7 @@
 use actix_web::{HttpRequest, HttpResponse};
 use serde::Serialize;
 
+
 #[derive(Serialize)]
 struct Response {
     ip: String,

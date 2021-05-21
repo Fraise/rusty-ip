@@ -1,7 +1,5 @@
-// use std::fs::File;
 use std::fs;
 use std::error::Error;
-use std::io::Read;
 use toml;
 use serde::Deserialize;
 
@@ -9,6 +7,13 @@ use serde::Deserialize;
 pub struct Config {
     pub listen_address: String,
     pub listen_port: u32,
+}
+
+pub fn default() -> Config {
+    Config {
+        listen_port: 80,
+        listen_address: String::from("0.0.0.0"),
+    }
 }
 
 pub fn parse(path: &str) -> Result<Config, Box<dyn Error>> {
