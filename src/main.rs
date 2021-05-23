@@ -29,14 +29,15 @@ async fn main() -> std::io::Result<()> {
         },
         None => {
             config = config::default();
-            // println!("no configuration file provided, using default:\n{}", config);
+            println!("no configuration file provided, using default:\n{}", config);
         }
     }
 
+    let path = config.path;
 
-    HttpServer::new(|| {
+    HttpServer::new(move || {
         App::new()
-            .route("/" ,web::get().to(handler::ip))
+            .route(path.as_str() ,web::get().to(handler::ip))
     })
     .bind(config.listen_address + ":" + config.listen_port.to_string().as_str())?
     .run()
