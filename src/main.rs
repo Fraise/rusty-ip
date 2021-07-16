@@ -20,7 +20,10 @@ async fn main() -> std::io::Result<()> {
     match args.config {
         Some(conf) => {
             config = match config::parse(&conf) {
-                Ok(c) => c,
+                Ok(c) => {
+                    println!("using configuration:\n{}", c);
+                    c
+                },
                 Err(e) => {
                     println!("could not parse the configuration file: {}", e);
                     return Ok(());
